@@ -1,5 +1,7 @@
 package com.qa.amazon.tests;
 
+import com.qa.amazon.utils.ConstantUtils;
+
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -11,13 +13,13 @@ public class Logintest extends basetest {
 	public void loginpagetitletest() {
 		String title = loginpage.getlogintitle();
 		System.out.println("Login Page title is:" + title);
-		Assert.assertEquals(title, "Online Shopping site in India: Shop Online for Mobiles, Books, Watches, Shoes and More - Amazon.in");
+		Assert.assertEquals(title,ConstantUtils.LOGIN_PAGE_TITLE);
 		
 	}
 	@Test(priority = 2)
 	public void loginpageurltest() {
 		String url = loginpage.getpageurl();
-         Assert.assertTrue(url.contains("amazon.in"));		
+         Assert.assertTrue(url.contains(ConstantUtils.LOGIN_URL_VALUE));		
 	}
 	
 

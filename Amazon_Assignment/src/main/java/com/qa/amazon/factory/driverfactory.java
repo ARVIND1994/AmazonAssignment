@@ -27,15 +27,16 @@ public class driverfactory {
 	 * @return
 	 */
 	
-	public WebDriver init_driver(String browsername) {
+	public WebDriver init_driver(Properties prop) {
+		String browserName = prop.getProperty("browser").trim();
 		
-		System.out.println("browser name is " + browsername);
+		System.out.println("browser name is " + browserName);
 		
-		if(browsername.equalsIgnoreCase("chrome")) {
+		if(browserName.equalsIgnoreCase("chrome")) {
 			WebDriverManager.chromedriver().setup();
 			driver = new ChromeDriver();
 		}
-		if(browsername.equalsIgnoreCase("firefox")) {
+		if(browserName.equalsIgnoreCase("firefox")) {
 			WebDriverManager.firefoxdriver().setup();
 			driver = new FirefoxDriver();
 		}
@@ -46,7 +47,7 @@ public class driverfactory {
 		
 		driver.manage().window().maximize();
 		driver.manage().deleteAllCookies();
-		driver.get("https://www.amazon.in/");
+		driver.get(prop.getProperty("url").trim());
 		return driver;
 	
 	}
@@ -54,7 +55,7 @@ public class driverfactory {
 	public Properties init_prop() {
 		prop = new Properties();
 		try {
-			FileInputStream ip = new FileInputStream("./src\\test\\java\\Config\\Config.properties");
+			FileInputStream ip = new FileInputStream(".\\src\\test\\java\\Config\\Config.properties");
 			prop.load(ip);
 		} catch (FileNotFoundException e) {
 			System.out.println("File not found");
